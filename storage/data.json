@@ -1,0 +1,264 @@
+{
+  "brokers": [
+    {
+      "id": 0,
+      "admin": false,
+      "name": "Колованов Р.А.",
+      "login": "rkolovanov",
+      "balance": 50000,
+      "waste": 0,
+      "earn": 0,
+      "stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ],
+      "selling_stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "admin": false,
+      "name": "Бобус А.А.",
+      "login": "bobus",
+      "balance": 1000000,
+      "waste": 0,
+      "earn": 0,
+      "stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ],
+      "selling_stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "admin": false,
+      "name": "Мутин В.В.",
+      "login": "lider",
+      "balance": 10000000,
+      "waste": 0,
+      "earn": 0,
+      "stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ],
+      "selling_stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "admin": true,
+      "name": "Трамп Д.Д.",
+      "login": "trump",
+      "balance": 0,
+      "waste": 0,
+      "earn": 0,
+      "stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ],
+      "selling_stocks": [
+        {
+          "id": 0,
+          "count": 0
+        },
+        {
+          "id": 1,
+          "count": 0
+        },
+        {
+          "id": 2,
+          "count": 0
+        },
+        {
+          "id": 3,
+          "count": 0
+        },
+        {
+          "id": 4,
+          "count": 0
+        }
+      ]
+    }
+  ],
+  "stocks": [
+    {
+      "id": 0,
+      "name": "Yandex",
+      "startingPrice": 4566,
+      "maxStep": 40,
+      "count": 100,
+      "changeType": 0
+    },
+    {
+      "id": 1,
+      "name": "Газпром",
+      "startingPrice": 319,
+      "maxStep": 5,
+      "count": 1000,
+      "changeType": 0
+    },
+    {
+      "id": 2,
+      "name": "Сбер Банк",
+      "startingPrice": 287,
+      "maxStep": 4,
+      "count": 1000,
+      "changeType": 0
+    },
+    {
+      "id": 3,
+      "name": "Северсталь",
+      "startingPrice": 1496,
+      "maxStep": 10,
+      "count": 200,
+      "changeType": 0
+    },
+    {
+      "id": 4,
+      "name": "TCS Group",
+      "startingPrice": 5990,
+      "maxStep": 50,
+      "count": 123,
+      "changeType": 0
+    }
+  ],
+  "settings": {
+    "datetimeStart": "2021-12-20T17:00:00",
+    "datetimeEnd": "2021-12-26T18:00:00",
+    "interval": 15,
+    "state": "in"
+  }
+}

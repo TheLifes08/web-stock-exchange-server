@@ -1,0 +1,11 @@
+{
+  "express": {
+    "ip": "localhost",
+    "port": 5010
+  },
+  "socket": {
+    "ip": "localhost",
+    "port": 5030
+  },
+  "storagePath": "/storage/data.json"
+}
