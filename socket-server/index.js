@@ -23,14 +23,15 @@ server.sockets.on("connection", (socket) =>{
         clearTimeout(endTimeout);
 
         server.emit("start");
-        data.settings.state = "in";
         data.settings.interval = parseInt(endInterval);
+        data.settings.datetimeStart = new Date().toISOString().substr(0, 19);
         data.settings.datetimeEnd = endDate;
         saveData(data);
+
         startExchangeInterval();
         endExchangeInterval();
 
-        console.log("Администратор запустил торги:", endDate, "интервал:", endInterval);
+        console.log("Администратор запустил торги:", endDate + "; интервал:", endInterval);
     });
 
     socket.on("end", () => {
@@ -40,6 +41,7 @@ server.sockets.on("connection", (socket) =>{
 
         server.emit("end")
         data.settings.state = "after";
+        data.settings.datetimeEnd = new Date().toISOString().substr(0, 19);
         saveData(data);
 
         console.log("Администратор завершил торги.");
@@ -58,7 +60,7 @@ server.sockets.on("connection", (socket) =>{
             saveData(data);
 
             server.emit("sell", {sellInfo: sellInfo});
-            console.log("Отмена продажи акций, данные:", sellInfo);
+            console.log("Продажа акций, данные:", sellInfo);
         } else {
             console.log("Ошибка при продажи акций.");
         }
@@ -70,20 +72,24 @@ server.sockets.on("connection", (socket) =>{
         if (cancelSellInfo.count <= data.brokers[cancelSellInfo.seller_id].selling_stocks[cancelSellInfo.stock_id].count) {
             data.brokers[cancelSellInfo.seller_id].selling_stocks[cancelSellInfo.stock_id].count -= cancelSellInfo.count;
             data.brokers[cancelSellInfo.seller_id].stocks[cancelSellInfo.stock_id].count += cancelSellInfo.count;
+            saveData(data);
 
             server.emit("notsell", { notsellInfo: cancelSellInfo });
             console.log("Отмена продажи акций, данные:", cancelSellInfo);
-            saveData(data);
         } else {
             console.log("Ошибка при отмене продажи акций.");
         }
     })
 
     socket.on("buy", (requestData) => {
+        if (data.settings.state !== "in") {
+            console.log("Ошибка при покупке акций. Торги не начались.");
+            return;
+        }
+
         let transaction = requestData.transaction;
 
-        if (((transaction.seller_id >= 0 && transaction.count <= data.brokers[transaction.seller_id].selling_stocks[transaction.stock_id].count) ||
-                (transaction.seller_id < 0 && transaction.count <= data.stocks[transaction.stock_id].count))
+        if (((transaction.seller_id >= 0 && transaction.count <= data.brokers[transaction.seller_id].selling_stocks[transaction.stock_id].count) || (transaction.seller_id < 0 && transaction.count <= data.stocks[transaction.stock_id].count))
             && data.brokers[transaction.buyer_id].balance >= transaction.count * transaction.price)
         {
             data.brokers[transaction.buyer_id].stocks[transaction.stock_id].count += transaction.count;
@@ -98,9 +104,10 @@ server.sockets.on("connection", (socket) =>{
                 data.stocks[transaction.stock_id].count -= transaction.count;
             }
 
+            saveData(data);
+
             server.emit("buy", { transaction: transaction });
             console.log("Покупка акций, транзакция:", transaction);
-            saveData(data);
         } else {
             console.log("Ошибка при покупке акций.");
         }
@@ -135,13 +142,17 @@ function startUpdatePriceInterval() {
 function startExchangeInterval() {
     console.log(`Начало торгов: ${data.settings.datetimeStart}, конец торгов: ${data.settings.datetimeEnd}, время до конца торгов: ${new Date(data.settings.datetimeEnd) - new Date()}`);
 
+    data.settings.state = "before";
+    saveData(data);
+
     clearTimeout(startTimeout);
 
     startTimeout = setTimeout(() => {
         console.log("Запуск торгов");
 
-        server.emit("start");
         data.settings.state = "in";
+        saveData(data);
+        server.emit("start");
 
         startUpdatePriceInterval();
     }, new Date(data.settings.datetimeStart) - new Date());
@@ -153,9 +164,9 @@ function endExchangeInterval() {
     endTimeout = setTimeout(() => {
         console.log("Конец торгов");
 
-        server.emit("end");
         data.settings.state = "after";
         saveData(data);
+        server.emit("end");
 
         clearInterval(priceUpdateInterval);
     }, new Date(data.settings.datetimeEnd) - new Date());

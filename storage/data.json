@@ -259,6 +259,6 @@
     "datetimeStart": "2021-12-20T17:00:00",
     "datetimeEnd": "2021-12-26T18:00:00",
     "interval": 15,
-    "state": "in"
+    "state": "before"
   }
 }
