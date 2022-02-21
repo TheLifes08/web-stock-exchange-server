@@ -1,3 +1,3 @@
 # web-stock-exchange-server
 
-Сервер приложения "Биржа акций" (web-stock-exchange-participation).
+Сервер приложения "Взаимодействия с биржей акций" (web-stock-exchange-participation).
